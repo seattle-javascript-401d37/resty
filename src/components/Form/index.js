@@ -1,49 +1,70 @@
-import React from 'react'
+import React from 'react';
 
-import './Form.scss'
-
-export default class Form extends React.Component {
+class Form extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             url: '',
             method: 'get',
-            submitted: false,
+        };
+    }
+    handleChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value });
+    }
+
+    handleSubmit = async e => {
+        e.preventDefault();
+
+        try {
+
+            //   this.props.toggleLoading();
+
+            let options = {
+                method: this.state.method,
+            };
+
+            let raw = await fetch(this.state.url, options);
+
+            let data = await raw.json();
+
+            let headers = {};
+            raw.headers.forEach((val, key) => headers[key] = val);
+
+            this.props.onSubmit(headers, data);
+
+            //   this.props.toggleLoading();
+
+        } catch (e) {
+            console.log(e);
         }
-    }
 
-    changeHandler = event => {
-        this.setState({url: event.target.value, submitted:false});
-    }
-
-    goClickHandler = event => {
-        this.setState({submitted:true});
-    }
-
-    setMethod(method) {
-        this.setState({method, submitted:false});
-    }
+    };
 
     render() {
         return (
-            <div className="Form">
-                <h3>URL:<input onChange={this.changeHandler} /></h3>
-                <button onClick={() => this.setMethod('get')}>GET</button>
-                <button onClick={() => this.setMethod('post')}>POST</button>
-                <button onClick={() => this.setMethod('put')}>PUT</button>
-                <button onClick={() => this.setMethod('delete')}>DELETE</button>
-
-
-                <button onClick={this.goClickHandler}>GO!</button>
-
-                {this.state.submitted &&
-                <section>
-                    <h3>URL: {this.state.url}</h3>
-                    <h3>method: {this.state.method}</h3>
-                </section>
-                }
-            </div>
-        )
+            <form onSubmit={this.handleSubmit}>
+                <div>
+                    <input type="text" name="url" placeholder="http://api.url.here" onChange={this.handleChange} />
+                    <button>GO!</button>
+                </div>
+                <div>
+                    <label>
+                        <input type="radio" name="method" value="get" onChange={this.handleChange} />GET
+          </label>
+                    <label>
+                        <input type="radio" name="method" value="post" onChange={this.handleChange} />POST
+          </label>
+                    <label>
+                        <input type="radio" name="method" value="put" onChange={this.handleChange} />PUT
+          </label>
+                    <label>
+                        <input type="radio" name="method" value="delete" onChange={this.handleChange} />DELETE
+          </label>
+                </div>
+            </form >
+        );
     }
 }
+
+export default Form;
