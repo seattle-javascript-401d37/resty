@@ -1,12 +1,12 @@
 import React from 'react'
-import ReactJson from 'react-json-view'
+import JSONPretty from 'react-json-pretty'
 
 function Results(props) {
     return (
         <>
         <h2>Count: {props.count}</h2>
-        <ReactJson src={props.headers} />
-        <ReactJson src={props.results} />
+        <JSONPretty data={props.headers} />
+        <JSONPretty data={props.results} />
         </>
     )
 }
