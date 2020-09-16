@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Form from './components/Form/index_classy';
+import Form from './components/Form/index';
 import Results from './components/Results';
 import History from './components/History';
 
