@@ -14,6 +14,7 @@ function History(props) {
         {
           Object.keys(calls).map(key =>
             <li key={key}>
+
               <span className={`method ${props.calls[key].method}`}>{props.calls[key].method}</span>
               <button className="url" onClick={() => loadRequest(props.calls[key])}>{props.calls[key].url}</button>
             </li>,
