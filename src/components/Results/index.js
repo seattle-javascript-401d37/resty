@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { If, Then, Else, When } from '../if';
+// import { If, Then, Else, When } from '../if';
 import ReactJson from 'react-json-view';
 
 import loading from '../../images/loading.gif';
