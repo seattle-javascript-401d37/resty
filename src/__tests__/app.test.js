@@ -30,13 +30,15 @@ it('loads and displays names', async () => {
 
     screen.getByText('ReSTy')
 
-//   const urlInput = screen.getByPlaceholderText('http://api.url.here');
-//   fireEvent.change(urlInput, {event:{target: 'https://swapi.dev/api/people/'}})
+  const urlInput = screen.getByPlaceholderText('http://api.url.here');
+  fireEvent.change(urlInput, {event:{target: 'https://swapi.dev/api/people/'}})
 
 //   screen.getAllByRole('complementary');
 
-//   fireEvent.click(screen.getByText('GO!'));
+  fireEvent.click(screen.getByText('GO!'));
 
 //   await screen.getByAltText('loading');
+
+    screen.debug();
 
 })

@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Form from './components/Form';
+import Form from './components/Form/index_classy';
 import Results from './components/Results';
 import History from './components/History';
 
@@ -25,11 +25,13 @@ class App extends React.Component {
     this.setState({ loading: !this.state.loading });
   }
 
-  updateHistory(options) {
-    console.log('options', options)
-    let hash = md5(JSON.stringify(options));
-    console.log('hash', hash);
-    this.setState({ history: { ...this.state.history, [hash]: options } }, () => {
+  updateHistory(request) {
+
+    let hash = md5(JSON.stringify(request));
+
+    const history = { ...this.state.history, [hash]: request }
+
+    this.setState({ history }, () => {
       localStorage.setItem('history', JSON.stringify(this.state.history));
     });
   }
@@ -47,12 +49,16 @@ class App extends React.Component {
     try {
 
       this.toggleLoading();
+
       this.updateRequest(request);
 
       let response = await axios(request);
 
       this.toggleLoading();
+
+
       this.updateHistory(request);
+
       this.updateResults(response.headers, response.data);
 
     }

@@ -9,7 +9,23 @@ const Results = (props) => {
 
   return (
     <section className="results">
-      <If condition={props.loading}>
+
+        {
+            props.loading ? (
+                <div className="loading">
+                    <img src={loading} alt="Loading" />
+                </div>
+            ) : (
+                <>
+                <h2>Headers</h2>
+                <ReactJson src={props.headers} />
+                <h2>Results</h2>
+                <ReactJson src={props.results} />
+                </>
+            )
+        }
+
+      {/* <If condition={props.loading}>
         <Then>
           <div className="loading">
             <img src={loading} alt="Loading" />
@@ -23,7 +39,8 @@ const Results = (props) => {
             <ReactJson src={props.results} />
           </When>
         </Else>
-      </If>
+      </If> */}
+
     </section>
   );
 
