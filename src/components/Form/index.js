@@ -1,70 +1,68 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-class Form extends React.Component {
+function Form(props) {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            url: '',
-            method: 'get',
-        };
-    }
-    handleChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
-    }
+  const [request, setRequest] = useState({});
 
-    handleSubmit = async e => {
-        e.preventDefault();
+  useEffect(() => {
+    const method = props.request.method || 'get';
+    const url = props.request.url || '';
+    const data = props.request.data ? JSON.stringify(props.request.data) : '';
+    setRequest({ method, url, data });
+  }, [props, setRequest]);
 
-        try {
+  const changeURL = (e) => {
+    let url = e.target.value;
+    setRequest({ ...request, url });
+  };
 
-            //   this.props.toggleLoading();
+  const changeMethod = (method) => {
+    setRequest({ ...request, method });
+  };
 
-            let options = {
-                method: this.state.method,
-            };
+  const changeBody = (e) => {
+    try {
+      let data = JSON.parse(e.target.value);
+      setRequest({ ...request, data });
+    } catch (e) { }
+  };
 
-            let raw = await fetch(this.state.url, options);
+  const handleSubmit = async e => {
+    e.preventDefault();
+    props.handler(request);
+  };
 
-            let data = await raw.json();
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <input
+          type="text"
+          name="url"
+          defaultValue={request.url}
+          placeholder="http://api.url.here"
+          onChange={changeURL}
+        />
+        <button>GO!</button>
+      </div>
+      <div className="methods">
+        <span className={`method ${request.method === 'get'}`} onClick={() => changeMethod('get')}>
+          GET
+        </span>
+        <span className={`method ${request.method === 'post'}`} onClick={() => changeMethod('post')}>
+          POST
+        </span>
+        <span className={`method ${request.method === 'put'}`} onClick={() => changeMethod('put')}>
+          PUT
+        </span>
+        <span className={`method ${request.method === 'delete'}`} onClick={() => changeMethod('delete')}>
+          DELETE
+        </span>
 
-            let headers = {};
-            raw.headers.forEach((val, key) => headers[key] = val);
+        <textarea name="data" onChange={changeBody} defaultValue={request.data} />
 
-            this.props.onSubmit(headers, data);
-
-            //   this.props.toggleLoading();
-
-        } catch (e) {
-            console.log(e);
-        }
-
-    };
-
-    render() {
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <div>
-                    <input type="text" name="url" placeholder="http://api.url.here" onChange={this.handleChange} />
-                    <button>GO!</button>
-                </div>
-                <div>
-                    <label>
-                        <input type="radio" name="method" value="get" onChange={this.handleChange} />GET
-          </label>
-                    <label>
-                        <input type="radio" name="method" value="post" onChange={this.handleChange} />POST
-          </label>
-                    <label>
-                        <input type="radio" name="method" value="put" onChange={this.handleChange} />PUT
-          </label>
-                    <label>
-                        <input type="radio" name="method" value="delete" onChange={this.handleChange} />DELETE
-          </label>
-                </div>
-            </form >
-        );
-    }
+      </div>
+    </form >
+  );
 }
 
 export default Form;

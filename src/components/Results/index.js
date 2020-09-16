@@ -1,14 +1,32 @@
-import React from 'react'
-import JSONPretty from 'react-json-pretty'
+import React from 'react';
 
-function Results(props) {
-    return (
-        <>
-        <h2>Count: {props.count}</h2>
-        <JSONPretty data={props.headers} />
-        <JSONPretty data={props.results} />
-        </>
-    )
-}
+import { If, Then, Else, When } from '../if';
+import ReactJson from 'react-json-view';
 
-export default Results
+import loading from '../../images/loading.gif';
+
+const Results = (props) => {
+
+  return (
+    <section className="results">
+      <If condition={props.loading}>
+        <Then>
+          <div className="loading">
+            <img src={loading} alt="Loading" />
+          </div>
+        </Then>
+        <Else>
+          <When condition={props.results}>
+            <h2>Headers</h2>
+            <ReactJson src={props.headers} />
+            <h2>Results</h2>
+            <ReactJson src={props.results} />
+          </When>
+        </Else>
+      </If>
+    </section>
+  );
+
+};
+
+export default Results;

@@ -4,7 +4,7 @@ import '@testing-library/jest-dom/extend-expect'
 import Results from './'
 
 
-it('should render Star Wars list', async () => {
+it.skip('should render Star Wars list', async () => {
 
   const results = [
     {
