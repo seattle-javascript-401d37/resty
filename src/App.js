@@ -3,6 +3,7 @@ import md5 from 'md5';
 import axios from 'axios';
 
 import Header from './components/Header';
+import Footer from './components/Footer';
 import Form from './components/Form';
 import Results from './components/Results';
 import History from './components/History';
@@ -74,6 +75,7 @@ class App extends React.Component {
           <History handler={this.updateRequest} calls={this.state.history} />
           <Results loading={this.state.loading} headers={this.state.headers} results={this.state.results} />
         </main>
+        <Footer />
       </>
     );
   }
