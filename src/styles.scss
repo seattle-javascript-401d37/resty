@@ -28,17 +28,20 @@ body {
 
   header {
     background: #111;
-    text-align: center;
+
+    display:flex;
+    flex-direction:column;
 
     h1 {
       color: #eee;
       display: inline-block;
       font-weight: 700;
       margin: .5em auto;
+    text-align: center;
     }
 
     nav {
-      background: #ccc;
+      background: rgb(85, 2, 2);
 
       ul {
         list-style-type: none;
@@ -51,7 +54,7 @@ body {
           position: relative;
 
           a {
-            color: #111;
+            color: #eee;
             text-decoration: none;
 
             &:after {
@@ -201,7 +204,6 @@ body {
           }
         }
       }
-    }
 
     .results {
       background: #f5f5f5;
@@ -211,6 +213,22 @@ body {
       margin: 1rem;
       overflow: auto;
       padding: 2rem;
+    }
+    }
+
+    section.historyPage {
+      display:flex;
+
+        aside {
+        div {
+          cursor:pointer;
+          padding: 1rem;
+          white-space: nowrap;
+          &:hover {
+            background: #efefef;
+          }
+        }
+      }
     }
   }
 }
