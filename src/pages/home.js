@@ -73,7 +73,7 @@ class App extends React.Component {
     return (
       <>
         <Form request={this.state.request} handler={this.fetchResults} />
-        <main>
+        <main role="document">
           <History handler={this.updateRequest} calls={this.state.history} />
           <Results loading={this.state.loading} headers={this.state.headers} results={this.state.results} />
         </main>
