@@ -71,13 +71,13 @@ class App extends React.Component {
   render() {
     console.log('render', this.state.request);
     return (
-      <>
+      <div role="document">
         <Form request={this.state.request} handler={this.fetchResults} />
         <main>
           <History handler={this.updateRequest} calls={this.state.history} />
           <Results loading={this.state.loading} headers={this.state.headers} results={this.state.results} />
         </main>
-      </>
+      </div>
     );
   }
 }
