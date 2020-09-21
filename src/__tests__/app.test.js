@@ -7,8 +7,14 @@ describe('app', () => {
 
   it('loads the home page', async () => {
     render(<App />);
-    fireEvent.click(screen.getByTestId('homelink'));
+    fireEvent.click(screen.getByRole('link',{ name:"Home" }));
     expect(screen.getByRole('document'));
+  })
+
+  it('navigates to help page', async () => {
+    render(<App />);
+    fireEvent.click(screen.getByRole('link',{ name:"Help" }));
+    expect(screen.getByText('Help Goes Here'));
   })
 
 
