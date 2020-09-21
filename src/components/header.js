@@ -7,7 +7,7 @@ const Header = props => {
       <h1>RESTy</h1>
       <nav>
         <ul>
-          <li><NavLink to="/" data-testid="homelink">Home</NavLink></li>
+          <li><NavLink to="/">Home</NavLink></li>
           <li><NavLink to="/history">History</NavLink></li>
           <li><NavLink to="/help">Help</NavLink></li>
         </ul>
