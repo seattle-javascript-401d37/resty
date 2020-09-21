@@ -1,4 +1,8 @@
 {
-  id:1,
-  text: "foo"
+    "tasks": [
+        {
+            "id":1,
+            "text": "foo"
+        }
+    ]
 }
