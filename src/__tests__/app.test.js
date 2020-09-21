@@ -3,7 +3,7 @@ import { render, waitFor, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import App from '../App.js'
 
-describe('app', () => {
+describe('Navigation', () => {
 
   it('loads the home page', async () => {
     render(<App />);
